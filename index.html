@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ЕФС. Платеж наличными</title>
+	<script
+  	src="https://code.jquery.com/jquery-3.2.1.min.js"
+  	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  	crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>Платеж наличными</h1>
+		</div>
+		<div class="row">
+			<form class="form-horizontal">
+				<div class="panel panel-primary">
+					<div class="panel-heading">1. Получатель</div>
+					<div class="form-group">
+							<!--<div class="radio">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Клиент банка
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Не клиент банка
+								</label>
+							</div>-->
+						<div class="col-sm-offset-2 col-sm-4">
+							<div class="checkbox">
+        						<label>
+	          						<input type="checkbox" onchange="toggle_visibility('recipient-bank-info')"	> Клиент банка
+    	    					</label>
+    	    				</div>
+      					</div>
+					</div>
+					<div class="form-group">
+						<label for="inputOrgName" class="col-sm-2 control-label">Организация</label>
+						<div class="col-sm-4">
+							<textarea rows="2" class="form-control force-validity-check" id="inputOrgName"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputINN" class="col-sm-2 control-label">ИНН</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control numbers-only force-validity-check" id="inputINN" maxlength="12">
+						</div>
+					</div>
+					<div class="form-group has-warning">
+						<label for="inputKPP" class="col-sm-2 control-label">КПП</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="inputKPP" maxlength="9" pattern="[0-9]{4}[A-Z]{2}[0-9A-Z]{3}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPayerAccount" class="col-sm-2 control-label">Счет получателя</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control numbers-only  force-validity-check" id="inputAccountPayer" maxlength="20">
+						</div>
+					</div>
+				</div>
+				<div id="recipient-bank-info" class="panel panel-primary">
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="inputPayerBankId" class="col-sm-2 control-label">Банк получателя</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control numbers-only force-validity-check" id="inputPayerBankId" maxlength="9" onchange="recipient_bank_search(inputPayerBankId.value);">
+							</div>
+							<div class="col-sm-3">
+								<input type="text" class="form-control force-validity-check" id="inputPayerBankName">
+							</div>
+							<button class="btn btn-link" type="submit" tabindex="-1">Подробнее</button>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">2. Информация о платеже</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="inputPaymentType" class="col-sm-2 control-label">Вид платежа</label>
+							<div class="col-sm-4">
+<!--								<div class="list-group">
+  									<button type="button" class="list-group-item">Оплата за коммунальные услуги</button>
+  									<button type="button" class="list-group-item">Оплата за ремонт</button>
+  									<button type="button" class="list-group-item">Оплата за пользование инфраструктурой</button>
+								</div>
+							</div>-->
+							    <div class="input-group">
+      								<input id="paymentType" type="text" class="form-control" placeholder="Выберите вид платежа" disabled="true">
+      								<div class="input-group-btn">
+        							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Выбрать <span class="caret"></span></button>
+        							<ul class="dropdown-menu dropdown-menu-right">
+          								<li><a href="#" onclick="replicate_value_to('paymentType','Оплата за коммунальные услуги');">Оплата за коммунальные услуги</a></li>
+          								<li><a href="#" onclick="replicate_value_to('paymentType','Оплата за ремонт');">Оплата за ремонт</a></li>
+          								<li><a href="#" onclick="replicate_value_to('paymentType','Оплата за пользование инфраструктурой');">Оплата за пользование инфраструктурой</a></li>
+        							</ul>
+      							</div><!-- /btn-group -->
+    						</div><!-- /input-group -->
+						</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPaymentAmount" class="col-sm-2 control-label">Сумма платежа</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control numbers-only force-validity-check" id="inputPaymentAmount">
+							</div>
+							<h4 class="col-sm-1">руб.</h4>
+							<div class="col-sm-1">
+								<input type="text" class="form-control numbers-only" id="inputPaymentAmount" value="00" maxlength="2">
+							</div>
+							<h4 class="col-sm-1">коп.</h4>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">3. Плательщик</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-4">
+								<div class="checkbox">
+        							<label>
+	          							<input type="checkbox"> Клиент банка
+    	    						</label>
+    	    					</div>
+      						</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPayerLastName" class="col-sm-2 control-label">ФИО</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="inputPayerLastName" style="text-transform:uppercase" placeholder="ФАМИЛИЯ">
+							</div>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="inputPayerFirstName" style="text-transform:uppercase" placeholder="ИМЯ">
+							</div>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="inputPayerPartonim" style="text-transform:uppercase"  placeholder="ОТЧЕСТВО">
+							</div>
+						</div>
+						<div class="form-group has-warning">
+							<div>
+								<label for="inputPayerDocType" class="col-sm-2 control-label">Документ</label>
+								<div class="dropdown col-sm-4" id="inputPayerDocType">
+  									<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Паспорт гражданина РФ
+    									<span class="caret"></span>
+  									</button>
+  									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    									<li><a href="#">Паспорт гражданина РФ</a></li>
+    									<li><a href="#">Загранпаспорт</a></li>
+  									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="form-group has-warning">
+							<label for="inputPayerDoc" class="col-sm-2 control-label">Серия и номер</label>
+							<div class="col-sm-1">
+								<input type="text" class="form-control numbers-only" id="inputPayerDoc" maxlength="4">
+							</div>
+							<div class="col-sm-2">
+								<input type="text" class="form-control numbers-only" id="inputPayerDocN" maxlength="6">
+							</div>
+						</div>
+						<div class="form-group has-warning">
+							<label for="inputPayerDocIssed" class="col-sm-2 control-label">Выдан</label>
+							<div class="col-sm-4">
+								<textarea rows="2" type="text" class="form-control" id="inputPayerDocIssed"></textarea>
+							</div>
+<!--								<input type="text" class="form-control" id="inputPayerDocIssed">-->
+						</div>
+						</div>
+						<div class="form-group has-warning">
+							<label for="inputPayerBirthplace" class="col-sm-2 control-label">Место рождения</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="inputPayerBirthplace">
+							</div>
+						</div>
+						<div class="form-group has-warning">
+							<label for="inputPayerBirthday" class="col-sm-2 control-label">Дата рождения</label>
+							<div class="col-sm-4">
+								<input type="date" class="form-control" id="inputPayerBirthday">
+							</div>
+						</div>
+						<div class="form-group has-warning">
+							<label for="inputPayerAddress" class="col-sm-2 control-label">Адрес</label>
+							<div class="col-sm-4">
+								<textarea type="text" class="form-control" rows="2" id="inputPayerAddress"></textarea> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">4. Параметры платежа</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="column col-md-3">Договор на срок</div>
+							<div class="column col-md-3">3 года</div>
+						</div>
+						<div class="row">
+							<div class="column col-md-3">Дата договора</div>
+							<div class="column col-md-3">01.01.2014</div>
+						</div>
+						<div class="row">
+							<div class="column col-md-3">ФИО клиента</div>
+							<div class="column col-md-3">ИВАНОВ ИВАН</div>
+						</div>
+						<div class="row">
+							<div class="column col-md-3">Телефон отправителя</div>
+							<div class="column col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">+</span>
+  									<input type="text" class="form-control input-sm numbers-only force-validity-check" id="inputPayerPhone" maxlength="11">
+  								</div>
+							</div>
+						</div>								
+					</div>
+				</div>
+				<div id="doc-panel" class="panel panel-primary" style="display:none">
+					<div class="panel-heading">5. Печать документов</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-6">
+									<div class="checkbox">
+        								<label>
+	          								<input type="checkbox" checked>Заявление на прием платежей
+	    	    						</label>
+    	    						</div>
+      							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-6">
+									<div class="checkbox">
+        								<label>
+	          								<input type="checkbox" checked>Приходный кассовый ордер на транзитный счет поставщика
+	    	    						</label>
+    	    						</div>
+      							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-6">
+									<div class="checkbox">
+        								<label>
+	          								<input type="checkbox" checked>Приходный кассовый ордер на комиссию
+	    	    						</label>
+    	    						</div>
+      							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+   					<label class="col-md-4" for="singlebutton"></label>
+   					<div class="col-md-4">
+      					<button type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="showDocuments();">
+          				Сформировать документы
+       					</button>
+   					</div>  
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="container">
+	<div class="row">
+			<div class="col-md-10">
+			<h2>|</h2>
+			</div>
+		</div>
+	</div>
+<script>
+    $(".numbers-only").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape and enter
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) || 
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+</script>
+<script>
+    $(".rus-and-spaces-only").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape and enter
+        if ($.inArray(e.keyCode, [32,46, 8, 9, 27, 13, 110]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) || 
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+</script>
+<script>
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display != 'none')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+<script>
+
+    function recipient_bank_search(id) {
+       if (id='10101') {
+       	document.getElementById('inputPayerBankName').setAttribute("value",'Первый Международный Банк г.Москва');
+    	}
+	}
+//-->
+</script>
+<script>
+	function replicate_value_to(element_id,target_value) {
+		document.getElementById(element_id).setAttribute("value",target_value);
+	};
+</script>
+<script>
+$(function() {
+    $('.force-validity-check').bind('focusout', function(e) {
+        if(!isValid($(this).val())) {
+            e.preventDefault();
+            $(this).focus();
+        }
+    });
+});
+
+    function isValid(str) {
+        if(str.length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+<script>
+function showDocuments() {
+	document.getElementById('doc-panel').style.display='block';
+	document.getElementById('singlebutton').setAttribute('target','printer.html')
+};
+</script>
+</body>
+</html>

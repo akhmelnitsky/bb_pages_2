@@ -19,347 +19,479 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>Платеж наличными</h1>
+			<h2>Платеж наличными</h2>
 		</div>
 		<div class="row">
-			<form class="form-horizontal">
-				<div class="panel panel-primary">
-					<div class="panel-heading">1. Получатель</div>
-					<div class="form-group">
-							<!--<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Клиент банка
-								</label>
-							</div>
-							<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Не клиент банка
-								</label>
-							</div>-->
-						<div class="col-sm-offset-2 col-sm-4">
-							<div class="checkbox">
-        						<label>
-	          						<input type="checkbox" onchange="toggle_visibility('recipient-bank-info')"	> Клиент банка
-    	    					</label>
-    	    				</div>
-      					</div>
+			<div class="col-md-6">
+				<div class="row payment-target-block">
+					<div class="row">
+						<div class="col-md-3"><h4 style="margin-top:0px; margin-bottom: 3px; margin-left:5px;"><span class="label label-primary">реквизиты получателя</span></h4></div>
 					</div>
-					<div class="form-group">
-						<label for="inputOrgName" class="col-sm-2 control-label">Организация</label>
-						<div class="col-sm-4">
-							<textarea rows="2" class="form-control force-validity-check" id="inputOrgName"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputINN" class="col-sm-2 control-label">ИНН</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control numbers-only force-validity-check" id="inputINN" maxlength="12">
-						</div>
-					</div>
-					<div class="form-group has-warning">
-						<label for="inputKPP" class="col-sm-2 control-label">КПП</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="inputKPP" maxlength="9" pattern="[0-9]{4}[A-Z]{2}[0-9A-Z]{3}">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPayerAccount" class="col-sm-2 control-label">Счет получателя</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control numbers-only  force-validity-check" id="inputAccountPayer" maxlength="20">
-						</div>
-					</div>
-				</div>
-				<div id="recipient-bank-info" class="panel panel-primary">
-					<div class="panel-body">
-						<div class="form-group">
-							<label for="inputPayerBankId" class="col-sm-2 control-label">Банк получателя</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control numbers-only force-validity-check" id="inputPayerBankId" maxlength="9" onchange="recipient_bank_search(inputPayerBankId.value);">
-							</div>
-							<div class="col-sm-3">
-								<input type="text" class="form-control force-validity-check" id="inputPayerBankName">
-							</div>
-							<button class="btn btn-link" type="submit" tabindex="-1">Подробнее</button>
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-primary">
-					<div class="panel-heading">2. Информация о платеже</div>
-					<div class="panel-body">
-						<div class="form-group">
-							<label for="inputPaymentType" class="col-sm-2 control-label">Вид платежа</label>
-							<div class="col-sm-4">
-<!--								<div class="list-group">
-  									<button type="button" class="list-group-item">Оплата за коммунальные услуги</button>
-  									<button type="button" class="list-group-item">Оплата за ремонт</button>
-  									<button type="button" class="list-group-item">Оплата за пользование инфраструктурой</button>
+					<div>
+						<div class="col-md-12">
+							<form class="form-horizontal" id="recipientForm">
+			       			<div class="form-group row denced-row">
+			        			<label for="inputKey" class="col-md-3 control-label" >ИНН</label>
+			          			<div class="col-md-4">
+			          				<input type="text" class="form-control" id="inputINN" maxlength="12" placeholder="XXXXXXXXXXXX"  onchange="innChanged(this.value)">
 								</div>
-							</div>-->
-							    <div class="input-group">
-      								<input id="paymentType" type="text" class="form-control" placeholder="Выберите вид платежа" disabled="true">
-      								<div class="input-group-btn">
-        							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Выбрать <span class="caret"></span></button>
-        							<ul class="dropdown-menu dropdown-menu-right">
-          								<li><a href="#" onclick="replicate_value_to('paymentType','Оплата за коммунальные услуги');">Оплата за коммунальные услуги</a></li>
-          								<li><a href="#" onclick="replicate_value_to('paymentType','Оплата за ремонт');">Оплата за ремонт</a></li>
-          								<li><a href="#" onclick="replicate_value_to('paymentType','Оплата за пользование инфраструктурой');">Оплата за пользование инфраструктурой</a></li>
-        							</ul>
-      							</div><!-- /btn-group -->
-    						</div><!-- /input-group -->
-						</div>
-						</div>
-						<div class="form-group">
-							<label for="inputPaymentAmount" class="col-sm-2 control-label">Сумма платежа</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control numbers-only force-validity-check" id="inputPaymentAmount">
-							</div>
-							<h4 class="col-sm-1">руб.</h4>
-							<div class="col-sm-1">
-								<input type="text" class="form-control numbers-only" id="inputPaymentAmount" value="00" maxlength="2">
-							</div>
-							<h4 class="col-sm-1">коп.</h4>
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-primary">
-					<div class="panel-heading">3. Плательщик</div>
-					<div class="panel-body">
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-4">
-								<div class="checkbox">
-        							<label>
-	          							<input type="checkbox"> Клиент банка
-    	    						</label>
-    	    					</div>
-      						</div>
-						</div>
-						<div class="form-group">
-							<label for="inputPayerLastName" class="col-sm-2 control-label">ФИО</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" id="inputPayerLastName" style="text-transform:uppercase" placeholder="ФАМИЛИЯ">
-							</div>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" id="inputPayerFirstName" style="text-transform:uppercase" placeholder="ИМЯ">
-							</div>
-							<div class="col-sm-2">
-								<input type="text" class="form-control" id="inputPayerPartonim" style="text-transform:uppercase"  placeholder="ОТЧЕСТВО">
-							</div>
-						</div>
-						<div class="form-group has-warning">
-							<div>
-								<label for="inputPayerDocType" class="col-sm-2 control-label">Документ</label>
-								<div class="dropdown col-sm-4" id="inputPayerDocType">
-  									<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Паспорт гражданина РФ
-    									<span class="caret"></span>
-  									</button>
-  									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    									<li><a href="#">Паспорт гражданина РФ</a></li>
-    									<li><a href="#">Загранпаспорт</a></li>
-  									</ul>
+			               		<label for="inputValue" class="col-md-1 control-label">КПП</label>
+			               		<div class="col-md-4">
+			                   		<input type="text" class="form-control" id="inputKPP" placeholder="XXXXPPXXX" maxlength="9">
+			               		</div>
+			        		</div>
+			        		<div class="form-group row denced-row">
+			        			<label for="inputOrgName" class="col-sm-3 control-label">Организация</label>
+								<div class="col-sm-9">
+									<textarea rows="2" class="form-control force-validity-check" id="inputOrgName"></textarea>
 								</div>
 							</div>
-						</div>
-						<div class="form-group has-warning">
-							<label for="inputPayerDoc" class="col-sm-2 control-label">Серия и номер</label>
-							<div class="col-sm-1">
-								<input type="text" class="form-control numbers-only" id="inputPayerDoc" maxlength="4">
-							</div>
-							<div class="col-sm-2">
-								<input type="text" class="form-control numbers-only" id="inputPayerDocN" maxlength="6">
-							</div>
-						</div>
-						<div class="form-group has-warning">
-							<label for="inputPayerDocIssed" class="col-sm-2 control-label">Выдан</label>
-							<div class="col-sm-4">
-								<textarea rows="2" type="text" class="form-control" id="inputPayerDocIssed"></textarea>
-							</div>
-<!--								<input type="text" class="form-control" id="inputPayerDocIssed">-->
-						</div>
-						</div>
-						<div class="form-group has-warning">
-							<label for="inputPayerBirthplace" class="col-sm-2 control-label">Место рождения</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inputPayerBirthplace">
-							</div>
-						</div>
-						<div class="form-group has-warning">
-							<label for="inputPayerBirthday" class="col-sm-2 control-label">Дата рождения</label>
-							<div class="col-sm-4">
-								<input type="date" class="form-control" id="inputPayerBirthday">
-							</div>
-						</div>
-						<div class="form-group has-warning">
-							<label for="inputPayerAddress" class="col-sm-2 control-label">Адрес</label>
-							<div class="col-sm-4">
-								<textarea type="text" class="form-control" rows="2" id="inputPayerAddress"></textarea> 
-							</div>
+							<div class="form-group row denced-row">
+								<label for="inputOrgName" class="col-sm-3 control-label">Счет</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="inputAccountttt" placeholder="XXX.XX.XXX.X.XXXX.XXXXXXX">
+								</div>
+		    				</div>
+							<div class="form-group row denced-row">
+								<label for="inputOrgName" class="col-sm-3 control-label">Банк</label>
+								<div class="col-sm-3"  style="padding-right: 3px">
+									<input type="text" class="form-control force-validity-check" id="inputBankId">
+								</div>
+								<div class="col-sm-6"  style="padding-left: 3px">
+									<input type="text" class="form-control force-validity-check" id="inputBankName">
+								</div>
+		    				</div>
+							</form>
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-primary">
-					<div class="panel-heading">4. Параметры платежа</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="column col-md-3">Договор на срок</div>
-							<div class="column col-md-3">3 года</div>
-						</div>
-						<div class="row">
-							<div class="column col-md-3">Дата договора</div>
-							<div class="column col-md-3">01.01.2014</div>
-						</div>
-						<div class="row">
-							<div class="column col-md-3">ФИО клиента</div>
-							<div class="column col-md-3">ИВАНОВ ИВАН</div>
-						</div>
-						<div class="row">
-							<div class="column col-md-3">Телефон отправителя</div>
-							<div class="column col-md-3">
-								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1">+</span>
-  									<input type="text" class="form-control input-sm numbers-only force-validity-check" id="inputPayerPhone" maxlength="11">
-  								</div>
+				<div class="row payment-target-block">
+					<div class="col-sm-12">
+						<form class="form-horizontal">
+							<div class="form-group row denced-row">
+		  						<label for="inputOrgName" class="col-md-3 control-label">Вид услуги</label>
+		  						<div class="col-md-9">
+									<div class="input-group">
+		  								<div class="input-group-btn">
+		    								<!-- Button and dropdown menu -->
+		    								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+											<ul class="dropdown-menu">
+									          <li><a href="#" id="service-1">Оплата услуг ЖКХ</a></li>
+									          <li><a href="#" id="service-2">Плата за пользование электроэнергией</a></li>
+									          <li><a href="#" id="service-3">Плата за эксплуатацию</a></li>
+									          <li role="separator" class="divider"></li>
+									          <li><a href="#">Ручной ввод</a></li>
+									        </ul>
+		    							</div>
+		    							<input id="service-pay" type="text" class="form-control" aria-label="...">
+		    						</div>
+								</div>
 							</div>
-						</div>								
+							<div class="form-group row denced-row">
+		  						<label for="inputOrgName" class="col-md-3 control-label">Параметры</label>
+								<div class="col-md-8">
+									<button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal">
+									Задать параметры
+									</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div id="doc-panel" class="panel panel-primary" style="display:none">
-					<div class="panel-heading">5. Печать документов</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<div class="checkbox">
-        								<label>
-	          								<input type="checkbox" checked>Заявление на прием платежей
-	    	    						</label>
-    	    						</div>
-      							</div>
+				<div id="extra-requisites" class="row payment-target-block" style="display: none">
+					<div class="row">
+						<div class="col-md-3"><h4 style="margin-top:0px; margin-bottom: 0px; margin-left:5px;"><span class="label label-primary">рекизиты услуги</span></h4></div>
+					</div>
+					<div class="col-md-12">
+						<form class="form-horizontal" id="recipientForm">
+		       				<div class="form-group row denced-row">
+		               			<label for="inputKey" class="col-md-3 control-label">ИНН</label>
+		               			<div class="col-md-4">
+		               				<input type="text" class="form-control" id="inputKey">
+								</div>
+		                		<label for="inputValue" class="col-md-1 control-label">КПП</label>
+		                		<div class="col-md-4">
+		                    		<input type="text" class="form-control" id="inputValue">
+		                		</div>
+		        			</div>
+		        			<div class="form-group row denced-row">
+		        				<label for="inputOrgName" class="col-sm-3 control-label">Организация</label>
+								<div class="col-sm-9">
+									<textarea rows="2" class="form-control force-validity-check" id="inputOrgName"></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<div class="checkbox">
-        								<label>
-	          								<input type="checkbox" checked>Приходный кассовый ордер на транзитный счет поставщика
-	    	    						</label>
-    	    						</div>
-      							</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-6">
-									<div class="checkbox">
-        								<label>
-	          								<input type="checkbox" checked>Приходный кассовый ордер на комиссию
-	    	    						</label>
-    	    						</div>
-      							</div>
-							</div>
+							<div class="form-group row denced-row">
+								<label for="inputOrgName" class="col-sm-3 control-label">Счет</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control force-validity-check">
+								</div>
+		    				</div>
+							<div class="form-group row denced-row">
+								<label for="inputOrgName" class="col-sm-3 control-label">Банк</label>
+								<div class="col-sm-3"  style="padding-right: 3px">
+									<input type="text" class="form-control force-validity-check">
+								</div>
+								<div class="col-sm-6"  style="padding-left: 3px">
+									<input type="text" class="form-control force-validity-check" >
+								</div>
+		    				</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row person-block-1 ">
+					<div class="col-md-12">
+		       			<div class="row denced-row">
+		       				<div class="col-md-1"><span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 14px;"></span></div>
+		       				<div class="col-md-8"><h4 style="margin-top:0px; margin-bottom: 0px">Константинопольский <br>Константин Константинович</h4></div>
+		       				<div class="col-md-3"><h4 style="margin-top:0px; margin-bottom: 0px;"><span class="label label-default">плательщик</span></h4></div>
+		        		</div>
+		        		<div class="row denced-row">
+							<div class="col-md-1"></div>
+		        			<div class="col-md-3">паспорт РФ</div>
+		          			<div class="col-md-8">7501 785 547</div>
+		          		</div>
+		           		<div class="row denced-row">
+							<div class="col-md-1"></div>
+		        			<div class="col-md-3">выдан</div>
+		          			<div class="col-md-8">УФМС Северо-Западного административного округа по г.Москве 31.12.2003 056-072</div>
+		          		</div>
+		          		<div class="row denced-row">
+							<div class="col-md-1"></div>
+		        			<div class="col-md-3">Дата рожд.</div>
+		          			<div class="col-md-2">01.04.1980</div>
+		          		</div>
+		          		<div class="row denced-row">
+		          			<div class="col-md-1"></div>
+		        			<div class="col-md-3">Место рожд.</div>
+		          			<div class="col-md-4">г. Прибалийск</div>
+		          		</div>
+		       			<div class="row denced-row">
+		       				<div class="col-md-1"></div>
+		        			<div class="col-md-3">ИНН</div>
+		          			<div class="col-md-3">7750 5785545</div>
+		          		</div>
+		          	</div>
+				</div>
+		       	<div class="row" id="payerThirdButton" >
+					<div class="col-md-12">
+						<div class="row denced-row" >
+							<div class="col-md-12">
+									<button \type="button" class="btn btn-block" data-toggle="modal" data-target="#passportModal">
+									Платеж от третьего лица
+									</button>
+								</div>
+
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-   					<label class="col-md-4" for="singlebutton"></label>
-   					<div class="col-md-4">
-      					<button type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="showDocuments();">
-          				Сформировать документы
-       					</button>
-   					</div>  
+		       	<div class="row person-block-1" style="display: none" id="payerThird">
+					<div class="col-md-12">
+						<div class="row denced-row" >
+		       				<div class="col-md-1"><span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 14px; font-color: #795548"></span></div>
+		       				<div class="col-md-8"><h4 style="margin-top:0px; margin-bottom: 0px;">Константинопольский<br>Константин Константинович</h4>
+		       				</div>
+		       				<div class="col-md-3"><h4 style="margin-top:0px; margin-bottom: 0px;"><span class="label label-default">платеж от лица</span></h4>
+		       				</div>
+		        		</div>
+		        		<div class="row denced-row">
+							<div class="col-md-1"></div>
+		        			<div class="col-md-3">паспорт РФ</div>
+		          			<div class="col-md-8">7501 785 547</div>
+		          		</div>
+		           		<div class="row denced-row">
+							<div class="col-md-1"></div>
+		        			<div class="col-md-3">выдан</div>
+		          			<div class="col-md-8">УФМС Северо-Западного административного округа по г.Москве 31.12.2003 056-072</div>
+		          		</div>
+		          		<div class="row denced-row">
+							<div class="col-md-1"></div>
+		        			<div class="col-md-3">Дата рожд.</div>
+		          			<div class="col-md-2">01.04.1980</div>
+		          		</div>
+		          		<div class="row denced-row">
+		          			<div class="col-md-1"></div>
+		        			<div class="col-md-3">Место рожд.</div>
+		          			<div class="col-md-4">г. Прибалийск</div>
+		          		</div>
+		       			<div class="row denced-row">
+		       				<div class="col-md-1"></div>
+		        			<div class="col-md-3">ИНН</div>
+		          			<div class="col-md-3">7750 5785545</div>
+		          		</div>
+					</div>
 				</div>
-			</form>
-		</div>
-	</div>
-	<div class="container">
-	<div class="row">
-			<div class="col-md-10">
-			<h2>|</h2>
 			</div>
 		</div>
+		<div class="row payment-block ">
+			<div class="col-md-6 ">
+				<form class="form-horizontal" id="recipientForm">
+        			<div class="form-group row denced-row">
+        				<label for="inputOrgName" class="col-sm-3 control-label">Сумма</label>
+						<div class="col-sm-3" style="padding-right: 1px;">
+							<input class="form-control force-validity-check" id="inputOrgName">
+						</div>
+						<div class="col-sm-1"  style="padding-right: 1px; padding-left: 1px;">
+							<h4>,</h4>
+						</div>
+						<div class="col-sm-2"  style="padding-left: 1px; margin-left: -30px;">
+							<input class="form-control force-validity-check" id="inputOrgName">
+						</div>
+					</div>
+					<div class="form-group row denced-row">
+        				<label for="inputOrgName" class="col-md-3 control-label">Метод</label>
+  						<div class="col-md-8">
+							<div class="input-group">
+  								<div class="input-group-btn">
+    								<!-- Button and dropdown menu -->
+    								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled="yes"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+    							</div>
+    							<input type="text" class="form-control" aria-label="Наличные" disabled="yes" value="Наличные">
+    						</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-6">
+				<form class="form-horizontal" id="recipientForm">
+        			<div class="form-group row denced-row">
+        				<label for="inputOrgName" class="col-sm-3 control-label">Комиссия</label>
+						<div class="col-sm-3" style="padding-right: 1px;">
+							<input class="form-control force-validity-check" id="inputOrgName" disabled="true">
+						</div>
+						<div class="col-sm-1"  style="padding-right: 1px; padding-left: 1px;">
+							<h4>,</h4>
+						</div>
+						<div class="col-sm-2"  style="padding-left: 1px; margin-left: -30px;">
+							<input class="form-control force-validity-check" id="inputOrgName" disabled="true">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-12">
+				<div class="form-group row denced-row">
+					<div class="col-sm-4 col-sm-offset-4">
+    					<button type="button" class="btn btn-primary btn-block">Сохранить платёж</button>
+    				</div>
+				</div>
+			</div>
 	</div>
-<script>
-    $(".numbers-only").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape and enter
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-             // Allow: Ctrl+A
-            (e.keyCode == 65 && e.ctrlKey === true) || 
-             // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-</script>
-<script>
-    $(".rus-and-spaces-only").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape and enter
-        if ($.inArray(e.keyCode, [32,46, 8, 9, 27, 13, 110]) !== -1 ||
-             // Allow: Ctrl+A
-            (e.keyCode == 65 && e.ctrlKey === true) || 
-             // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-</script>
-<script>
-<!--
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display != 'none')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-    }
-//-->
-</script>
-<script>
 
-    function recipient_bank_search(id) {
-       if (id='10101') {
-       	document.getElementById('inputPayerBankName').setAttribute("value",'Первый Международный Банк г.Москва');
-    	}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Параметры платежа</h4>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<form class="form-horizontal">
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-6 control-label">Номер квартиры</label>
+  						<div class="col-md-6">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-6 control-label">Начальное значение счетчика</label>
+  						<div class="col-md-6">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-6 control-label">Конечное значение счетчика</label>
+  						<div class="col-md-6">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-6 control-label">Код платежа</label>
+  						<div class="col-md-6">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-6 control-label">Идентификатор ЖКУ</label>
+  						<div class="col-md-6">
+							<input type="text" class="form-control" aria-label="..." placeholder="XX-ЖК-XXXXX">
+ 						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="passportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Параметры плательщика</h4>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<form class="form-horizontal">
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-3 control-label">Документ</label>
+  						<div class="col-md-9">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-3 control-label">Номер док-та</label>
+  						<div class="col-md-9">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-3 control-label">Фамилия</label>
+  						<div class="col-md-9">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-3 control-label">Имя</label>
+  						<div class="col-md-9">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-3 control-label">Отчество</label>
+  						<div class="col-md-9">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-3 control-label">Дата выдачи</label>
+  						<div class="col-md-9">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+					<div class="form-group row denced-row">
+  						<label for="inputOrgName" class="col-md-3 control-label">Кем выдан</label>
+  						<div class="col-md-9">
+							<input type="text" class="form-control" aria-label="...">
+ 						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmPassport">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+	<style type="text/css">
+		.denced-row {
+			margin-bottom: 1px !important;
+			margin-top: 1px !important;
+		}
+	</style>
+
+	<style type="text/css">
+		.payment-target-block {
+			padding-top: 5px !important;
+			padding-bottom: 5px !important;
+			margin-top: 5px !important;
+			margin-bottom: 5px !important;
+			margin-left: -10px !important;
+			background:#e3f2fd;
+		}
+		.person-block-1 {
+			padding-top: 5px !important;
+			padding-bottom: 5px !important;
+			margin-top: 5px !important;
+			margin-bottom: 5px !important;
+			margin-left: -10px !important;
+			background: #efebe9;
+		}
+		.person-block-2 {
+			padding-top: 5px !important;
+			padding-bottom: 5px !important;
+			margin-top: 5px !important;
+			margin-bottom: 5px !important;
+			margin-left: -10px !important;
+			background: #efebe9;
+		}
+		.payment-block {
+			padding-top: 5px !important;
+			padding-bottom: 5px !important;
+			margin-top: 5px !important;
+			margin-bottom: 5px !important;
+			margin-left: -10px !important;
+			background: #c8e6c9;
+		}
+		/* Place Holder CSS */
+.placeholder-fix:focus::-webkit-input-placeholder  { color:transparent; }
+.placeholder-fix:focus::-moz-placeholder   { color:transparent; }
+	</style>
+	<script type="text/javascript">
+		$("#service-1").click(function(e){
+			//do something
+			$("#service-pay").val("Оплата услуг ЖКХ");
+			e.preventDefault();
+			var f = document.getElementById("extra-requisites");
+			f.style.display = 'none';
+		});
+		$("#service-2").click(function(e){
+			//do something
+			$("#service-pay").val("Плата за пользование электроэнергией");
+			var f = document.getElementById("extra-requisites");
+			f.style.display = 'block';
+			e.preventDefault();
+
+		});
+		$("#service-3").click(function(e){
+			//do something
+			$("#service-pay").val("Плата за эксплуатацию");
+			var f = document.getElementById("extra-requisites");
+			f.style.display = 'none';
+			e.preventDefault();
+		});
+		$("#confirmPassport").click(function(e){
+			//do something
+			var f = document.getElementById("payerThirdButton");
+			f.style.display = 'none';
+			var f = document.getElementById("payerThird");
+			f.style.display = 'block';
+		});
+	</script>
+<script type="text/javascript">
+	
+	!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports?require("jquery"):jQuery)}(function(a){var b,c=navigator.userAgent,d=/iphone/i.test(c),e=/chrome/i.test(c),f=/android/i.test(c);a.mask={definitions:{9:"[0-9]",a:"[A-Za-z]","*":"[A-Za-z0-9]"},autoclear:!0,dataName:"rawMaskFn",placeholder:"_"},a.fn.extend({caret:function(a,b){var c;if(0!==this.length&&!this.is(":hidden"))return"number"==typeof a?(b="number"==typeof b?b:a,this.each(function(){this.setSelectionRange?this.setSelectionRange(a,b):this.createTextRange&&(c=this.createTextRange(),c.collapse(!0),c.moveEnd("character",b),c.moveStart("character",a),c.select())})):(this[0].setSelectionRange?(a=this[0].selectionStart,b=this[0].selectionEnd):document.selection&&document.selection.createRange&&(c=document.selection.createRange(),a=0-c.duplicate().moveStart("character",-1e5),b=a+c.text.length),{begin:a,end:b})},unmask:function(){return this.trigger("unmask")},mask:function(c,g){var h,i,j,k,l,m,n,o;if(!c&&this.length>0){h=a(this[0]);var p=h.data(a.mask.dataName);return p?p():void 0}return g=a.extend({autoclear:a.mask.autoclear,placeholder:a.mask.placeholder,completed:null},g),i=a.mask.definitions,j=[],k=n=c.length,l=null,a.each(c.split(""),function(a,b){"?"==b?(n--,k=a):i[b]?(j.push(new RegExp(i[b])),null===l&&(l=j.length-1),k>a&&(m=j.length-1)):j.push(null)}),this.trigger("unmask").each(function(){function h(){if(g.completed){for(var a=l;m>=a;a++)if(j[a]&&C[a]===p(a))return;g.completed.call(B)}}function p(a){return g.placeholder.charAt(a<g.placeholder.length?a:0)}function q(a){for(;++a<n&&!j[a];);return a}function r(a){for(;--a>=0&&!j[a];);return a}function s(a,b){var c,d;if(!(0>a)){for(c=a,d=q(b);n>c;c++)if(j[c]){if(!(n>d&&j[c].test(C[d])))break;C[c]=C[d],C[d]=p(d),d=q(d)}z(),B.caret(Math.max(l,a))}}function t(a){var b,c,d,e;for(b=a,c=p(a);n>b;b++)if(j[b]){if(d=q(b),e=C[b],C[b]=c,!(n>d&&j[d].test(e)))break;c=e}}function u(){var a=B.val(),b=B.caret();if(o&&o.length&&o.length>a.length){for(A(!0);b.begin>0&&!j[b.begin-1];)b.begin--;if(0===b.begin)for(;b.begin<l&&!j[b.begin];)b.begin++;B.caret(b.begin,b.begin)}else{for(A(!0);b.begin<n&&!j[b.begin];)b.begin++;B.caret(b.begin,b.begin)}h()}function v(){A(),B.val()!=E&&B.change()}function w(a){if(!B.prop("readonly")){var b,c,e,f=a.which||a.keyCode;o=B.val(),8===f||46===f||d&&127===f?(b=B.caret(),c=b.begin,e=b.end,e-c===0&&(c=46!==f?r(c):e=q(c-1),e=46===f?q(e):e),y(c,e),s(c,e-1),a.preventDefault()):13===f?v.call(this,a):27===f&&(B.val(E),B.caret(0,A()),a.preventDefault())}}function x(b){if(!B.prop("readonly")){var c,d,e,g=b.which||b.keyCode,i=B.caret();if(!(b.ctrlKey||b.altKey||b.metaKey||32>g)&&g&&13!==g){if(i.end-i.begin!==0&&(y(i.begin,i.end),s(i.begin,i.end-1)),c=q(i.begin-1),n>c&&(d=String.fromCharCode(g),j[c].test(d))){if(t(c),C[c]=d,z(),e=q(c),f){var k=function(){a.proxy(a.fn.caret,B,e)()};setTimeout(k,0)}else B.caret(e);i.begin<=m&&h()}b.preventDefault()}}}function y(a,b){var c;for(c=a;b>c&&n>c;c++)j[c]&&(C[c]=p(c))}function z(){B.val(C.join(""))}function A(a){var b,c,d,e=B.val(),f=-1;for(b=0,d=0;n>b;b++)if(j[b]){for(C[b]=p(b);d++<e.length;)if(c=e.charAt(d-1),j[b].test(c)){C[b]=c,f=b;break}if(d>e.length){y(b+1,n);break}}else C[b]===e.charAt(d)&&d++,k>b&&(f=b);return a?z():k>f+1?g.autoclear||C.join("")===D?(B.val()&&B.val(""),y(0,n)):z():(z(),B.val(B.val().substring(0,f+1))),k?b:l}var B=a(this),C=a.map(c.split(""),function(a,b){return"?"!=a?i[a]?p(b):a:void 0}),D=C.join(""),E=B.val();B.data(a.mask.dataName,function(){return a.map(C,function(a,b){return j[b]&&a!=p(b)?a:null}).join("")}),B.one("unmask",function(){B.off(".mask").removeData(a.mask.dataName)}).on("focus.mask",function(){if(!B.prop("readonly")){clearTimeout(b);var a;E=B.val(),a=A(),b=setTimeout(function(){B.get(0)===document.activeElement&&(z(),a==c.replace("?","").length?B.caret(0,a):B.caret(a))},10)}}).on("blur.mask",v).on("keydown.mask",w).on("keypress.mask",x).on("input.mask paste.mask",function(){B.prop("readonly")||setTimeout(function(){var a=A(!0);B.caret(a),h()},0)}),e&&f&&B.off("input.mask").on("input.mask",u),A()})}})});
+</script>
+<script type="text/javascript">
+			$("#inputAccountttt").mask("999.99.999.9.9999.9999999");
+			$("#inputINN").mask("999999999999");
+			$("#inputKPP").mask("9999aa999");
+</script>
+<script type="text/javascript">
+	function innChanged(e) {
+		if (e=="222222222222") {
+			document.getElementById("inputKPP").value="9322RU12";
+			document.getElementById("inputOrgName").value="МФЦ Кировского р-на г.Нижний Новгород";
+			document.getElementById("inputAccountttt").value="622.99.231.5.3251.4222342";
+			document.getElementById("inputBankId").value="453241";
+			document.getElementById("inputBankName").value="Первый нижегородский банк";
+		}
 	}
-//-->
-</script>
-<script>
-	function replicate_value_to(element_id,target_value) {
-		document.getElementById(element_id).setAttribute("value",target_value);
-	};
-</script>
-<script>
-$(function() {
-    $('.force-validity-check').bind('focusout', function(e) {
-        if(!isValid($(this).val())) {
-            e.preventDefault();
-            $(this).focus();
-        }
-    });
-});
-
-    function isValid(str) {
-        if(str.length > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
-<script>
-function showDocuments() {
-	document.getElementById('doc-panel').style.display='block';
-	document.getElementById('singlebutton').setAttribute('target','printer.html')
-};
 </script>
 </body>
 </html>

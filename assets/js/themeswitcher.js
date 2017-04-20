@@ -7,7 +7,7 @@ function doc_keyUp(e) {
 
     // this would test for whichever key is 40 and the ctrl key at the same time
     //if (e.altKey && e.keyCode ==) {
-    	if (e.altKey && between(e.keyCode,49,58) {
+    	if (e.altKey && e.keyCode>=49 && e.keyCode<=58) {
         // call your function to do the thing
         var newStyle=styleSwitchCollection[e.keyCode-49];
         document.getElementById("bscss").href = newStyle;

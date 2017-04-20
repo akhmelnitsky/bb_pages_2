@@ -1,4 +1,3 @@
-<script>
 var styleSwitchCollection=
 ['https://bootswatch.com/cyborg/bootstrap.min.css',
 'https://bootswatch.com/cerulean/bootstrap.min.css',
@@ -16,4 +15,3 @@ function doc_keyUp(e) {
 }
 // register the handler 
 document.addEventListener('keyup', doc_keyUp, false);
-</script>

@@ -4,7 +4,7 @@ var styleSwitchCollection=
 'https://bootswatch.com/cosmo/bootstrap.min.css']
 
 function doc_keyUp(e) {
-
+console.log(e.keyCode);
     // this would test for whichever key is 40 and the ctrl key at the same time
     //if (e.altKey && e.keyCode ==) {
     	if (e.altKey && (e.keyCode>=49) && (e.keyCode<=58)) {

@@ -21,3 +21,8 @@ console.log(e.keyCode);
 }
 // register the handler 
 document.addEventListener('keyup', doc_keyUp, false);
+
+var css = document.createElement("style");
+css.type = "text/css";
+css.innerHTML = ".form-group { margin-bottom: 5px !important}";
+document.body.appendChild(css);

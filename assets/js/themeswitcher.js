@@ -11,7 +11,7 @@ function doc_keyUp(e) {
     	if (e.altKey) {
         // call your function to do the thing
         var newStyle=styleSwitchCollection[e.keyCode-49];
-        document.getElementById("css1").href = newStyle;
+        document.getElementById("bscss").href = newStyle;
     }
 }
 // register the handler 

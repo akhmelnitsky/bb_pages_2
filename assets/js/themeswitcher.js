@@ -34,5 +34,5 @@ document.body.appendChild(css);
 
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ".form-control { height: 14px !important}";
+css.innerHTML = ".form-group { height: 26px !important}";
 document.body.appendChild(css);

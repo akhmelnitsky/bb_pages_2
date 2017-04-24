@@ -31,3 +31,8 @@ var css = document.createElement("style");
 css.type = "text/css";
 css.innerHTML = "a[data-href='welcome.html'] { margin-top: 45px !important}";
 document.body.appendChild(css);
+
+var css = document.createElement("style");
+css.type = "text/css";
+css.innerHTML = ".form-control { height: 32px !important}";
+document.body.appendChild(css);

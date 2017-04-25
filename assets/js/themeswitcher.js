@@ -36,3 +36,9 @@ var css = document.createElement("style");
 css.type = "text/css";
 css.innerHTML = "input.form-control { height: 32px !important}";
 document.body.appendChild(css);
+
+
+var css = document.createElement("style");
+css.type = "text/css";
+css.innerHTML = ".inline-button { height: 32px !important}";
+document.body.appendChild(css);

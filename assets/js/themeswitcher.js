@@ -55,5 +55,5 @@ document.body.appendChild(css);
 
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ".header {  padding-bottom: 0px;  !important} ";
+css.innerHTML = ".header {  padding-bottom: 0px !important} ";
 document.body.appendChild(css);

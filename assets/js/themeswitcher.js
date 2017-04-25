@@ -42,3 +42,8 @@ var css = document.createElement("style");
 css.type = "text/css";
 css.innerHTML = ".inline-button { height: 32px !important; padding-top: 4px !important}";
 document.body.appendChild(css);
+
+var css = document.createElement("style");
+css.type = "text/css";
+css.innerHTML = ".tooltip > p { text-align:left; }";
+document.body.appendChild(css);

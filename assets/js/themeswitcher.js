@@ -45,5 +45,5 @@ document.body.appendChild(css);
 
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ".tooltip > div { text-align:left; }";
+css.innerHTML = ".tooltip-inner { text-align:left; }";
 document.body.appendChild(css);

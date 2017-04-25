@@ -45,15 +45,15 @@ document.body.appendChild(css);
 
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ".tooltip-inner { text-align:left; }";
+css.innerHTML = ".tooltip-inner { text-align:left;  !important}";
 document.body.appendChild(css);
 
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ".tab-content > .row { margin-top: 0px} ";
+css.innerHTML = ".tab-content > .row { margin-top: 0px  !important} ";
 document.body.appendChild(css);
 
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ".header { margin-bottom: 0px; padding-bottom: 0px;} ";
+css.innerHTML = ".header { margin-bottom: 0px; padding-bottom: 0px;  !important} ";
 document.body.appendChild(css);

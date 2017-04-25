@@ -50,4 +50,5 @@ document.body.appendChild(css);
 
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ".tab-content > .row { margin-top: 0px} "
+css.innerHTML = ".tab-content > .row { margin-top: 0px} ";
+document.body.appendChild(css);

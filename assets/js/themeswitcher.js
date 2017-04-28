@@ -1,6 +1,6 @@
 var styleSwitchCollection=
 ['https://bootswatch.com/cyborg/bootstrap.min.css',
-'https://bootswatch.com/cerulean/bootstrap.min.css',
+'http://seantheme.com/color-admin-v2.2/admin/html/assets/plugins/bootstrap/css/bootstrap.min.css',
 'https://bootswatch.com/cosmo/bootstrap.min.css',
 'https://bootswatch.com/yeti/bootstrap.min.css',
 'https://bootswatch.com/superhero/bootstrap.min.css',

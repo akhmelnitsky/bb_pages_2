@@ -1,6 +1,6 @@
 var styleSwitchCollection=
 ['https://bootswatch.com/cyborg/bootstrap.min.css',
-'rawgit.com/akhmelnitsky/bb_pages_2/master/assets/css/bt.css',
+'https://bootswatch.com/flatly/bootstrap.min.css',
 'https://bootswatch.com/cosmo/bootstrap.min.css',
 'https://bootswatch.com/yeti/bootstrap.min.css',
 'https://bootswatch.com/superhero/bootstrap.min.css',

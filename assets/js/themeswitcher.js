@@ -5,9 +5,9 @@ var styleSwitchCollection=
 'https://bootswatch.com/yeti/bootstrap.min.css',
 'https://bootswatch.com/superhero/bootstrap.min.css',
 'https://bootswatch.com/sandstone/bootstrap.min.css',
-'https://bootswatch.com/simplex/bootstrap.min.css',
+'https://bootswatch.com/slate/bootstrap.min.css',
 'https://bootswatch.com/readable/bootstrap.min.css',
-'https://bootswatch.com/darkly/bootstrap.min.css']
+'https://bootswatch.com/darkly/bootstrap.min.css',]
 
 function doc_keyUp(e) {
 console.log(e.keyCode);
